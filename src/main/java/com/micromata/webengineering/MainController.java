@@ -43,6 +43,7 @@ public class MainController {
 
     Entry entry = new Entry();
     entry.setTitle(title);
+    entry.setVotes((long) (Math.random() * 10000));
     LOG.debug("Entry generated. entry={}", entry);
     list.add(entry);
 
