@@ -41,6 +41,6 @@ public class MainController {
   @RequestMapping("/entry")
   public String entry() {
     LOG.info("Request to /entry");
-    return "index";
+    return "redirect:/";
   }
 }
