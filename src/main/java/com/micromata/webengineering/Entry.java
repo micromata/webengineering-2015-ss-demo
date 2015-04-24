@@ -34,6 +34,10 @@ public class Entry {
     this.title = title;
   }
 
+  public Long getId() {
+    return id;
+  }
+
   @Override
   public String toString() {
     return "Entry{" +

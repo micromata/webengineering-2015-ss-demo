@@ -19,16 +19,15 @@ public class EntryController {
   @Autowired
   private EntryRepository entryRepository;
 
+  @Autowired
+  private EntryService entryService;
+
   @RequestMapping("/entry")
   public String entry(@RequestParam("title") String title) {
     LOG.info("Request to /entry");
     LOG.debug("title={}", title);
 
-    Entry entry = new Entry();
-    entry.setTitle(title);
-    entry.setVotes((long) (Math.random() * 10000));
-    LOG.debug("Entry generated. entry={}", entry);
-    entryRepository.save(entry);
+    entryService.createEntry(title);
 
     return "redirect:/";
   }
