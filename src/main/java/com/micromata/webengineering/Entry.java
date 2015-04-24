@@ -1,11 +1,20 @@
 package com.micromata.webengineering;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * POJO (plain old java object) for entries.
  *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
+@Entity
 public class Entry {
+  @Id
+  @GeneratedValue
+  private Long id;
+
   private Long votes;
   private String title;
 
