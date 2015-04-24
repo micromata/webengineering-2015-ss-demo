@@ -2,14 +2,13 @@ package com.micromata.webengineering;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Main controller.
@@ -20,9 +19,8 @@ import java.util.List;
 public class MainController {
   private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
 
-  // IGNORE DO NOT USE IN PRODUCTION EVER
-  List<Entry> list = new LinkedList<>();
-  // I AM ASHAMED
+  @Autowired
+  private EntryRepository entryRepository;
 
   @RequestMapping("/")
   public ModelAndView index() {
@@ -30,7 +28,7 @@ public class MainController {
 
     ModelAndView mav = new ModelAndView("index");
 
-    mav.addObject("list", list);
+    mav.addObject("list", entryRepository.findAll());
     mav.addObject("date", new Date());
 
     return mav;
@@ -45,7 +43,7 @@ public class MainController {
     entry.setTitle(title);
     entry.setVotes((long) (Math.random() * 10000));
     LOG.debug("Entry generated. entry={}", entry);
-    list.add(entry);
+    entryRepository.save(entry);
 
     return "redirect:/";
   }
