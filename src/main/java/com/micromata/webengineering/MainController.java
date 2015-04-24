@@ -20,19 +20,16 @@ import java.util.List;
 public class MainController {
   private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
 
+  // IGNORE DO NOT USE IN PRODUCTION EVER
+  List<Entry> list = new LinkedList<>();
+  // I AM ASHAMED
+
   @RequestMapping("/")
   public ModelAndView index() {
     LOG.info("Request to /index");
 
     ModelAndView mav = new ModelAndView("index");
 
-    List<Entry> list = new LinkedList<>();
-    for (long i = 0; i < 10; i++) {
-      Entry entry = new Entry();
-      entry.setVotes(i);
-      entry.setTitle("Title:" + Long.toString(i));
-      list.add(entry);
-    }
     mav.addObject("list", list);
     mav.addObject("date", new Date());
 
@@ -47,6 +44,7 @@ public class MainController {
     Entry entry = new Entry();
     entry.setTitle(title);
     LOG.debug("Entry generated. entry={}", entry);
+    list.add(entry);
 
     return "redirect:/";
   }
