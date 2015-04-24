@@ -28,7 +28,7 @@ public class MainController {
 
     ModelAndView mav = new ModelAndView("index");
 
-    mav.addObject("list", entryRepository.findAll());
+    mav.addObject("list", entryRepository.findAllByOrderByVotesDesc());
     mav.addObject("date", new Date());
 
     return mav;
