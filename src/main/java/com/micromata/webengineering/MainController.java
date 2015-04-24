@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -39,8 +40,9 @@ public class MainController {
   }
 
   @RequestMapping("/entry")
-  public String entry() {
+  public String entry(@RequestParam("title") String title) {
     LOG.info("Request to /entry");
+    LOG.info("title={}", title);
     return "redirect:/";
   }
 }
