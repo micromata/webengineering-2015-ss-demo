@@ -43,6 +43,11 @@ public class MainController {
   public String entry(@RequestParam("title") String title) {
     LOG.info("Request to /entry");
     LOG.debug("title={}", title);
+
+    Entry entry = new Entry();
+    entry.setTitle(title);
+    LOG.debug("Entry generated. entry={}", entry);
+
     return "redirect:/";
   }
 }
