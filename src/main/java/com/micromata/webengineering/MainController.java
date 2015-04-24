@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -32,19 +31,5 @@ public class MainController {
     mav.addObject("date", new Date());
 
     return mav;
-  }
-
-  @RequestMapping("/entry")
-  public String entry(@RequestParam("title") String title) {
-    LOG.info("Request to /entry");
-    LOG.debug("title={}", title);
-
-    Entry entry = new Entry();
-    entry.setTitle(title);
-    entry.setVotes((long) (Math.random() * 10000));
-    LOG.debug("Entry generated. entry={}", entry);
-    entryRepository.save(entry);
-
-    return "redirect:/";
   }
 }
