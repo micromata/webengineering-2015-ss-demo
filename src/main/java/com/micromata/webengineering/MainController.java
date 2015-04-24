@@ -37,4 +37,10 @@ public class MainController {
 
     return mav;
   }
+
+  @RequestMapping("/entry")
+  public String entry() {
+    LOG.info("Request to /entry");
+    return "index";
+  }
 }
