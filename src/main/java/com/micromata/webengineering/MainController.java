@@ -42,7 +42,7 @@ public class MainController {
   @RequestMapping("/entry")
   public String entry(@RequestParam("title") String title) {
     LOG.info("Request to /entry");
-    LOG.info("title={}", title);
+    LOG.debug("title={}", title);
     return "redirect:/";
   }
 }
