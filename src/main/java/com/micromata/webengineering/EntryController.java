@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.concurrent.Callable;
+
 /**
  * Controller for handling all request of entries.
  *
@@ -39,16 +41,11 @@ public class EntryController {
     LOG.info("Request to /entry/upvote with id={}", id);
 
     // Upvote until it succeeds.
-    boolean retry;
-    do {
-      retry = false;
-      try {
-        entryService.upvote(id);
-      } catch (OptimisticLockingFailureException e) {
-        LOG.warn("Concurrent upvote, retrying.");
-        retry = true;
-      }
-    } while (retry);
+    retryOperation(() -> {
+      entryService.upvote(id);
+      return null;
+    });
+
     return "redirect:/";
   }
 
@@ -57,16 +54,33 @@ public class EntryController {
     LOG.info("Request to /entry/downvote with id={}", id);
 
     // Upvote until it succeeds.
+    retryOperation(() -> {
+      entryService.downvote(id);
+      return null;
+    });
+    return "redirect:/";
+  }
+
+  /**
+   * Retries an SQL operation until it succeeds, i.e. no OptimisticLockingFailureException is thrown.
+   * <p>
+   * Rethrows any other exception as a RuntimeException.
+   *
+   * @param method the method.
+   */
+  private void retryOperation(Callable<Void> method) {
     boolean retry;
     do {
       retry = false;
       try {
-        entryService.downvote(id);
+        method.call();
       } catch (OptimisticLockingFailureException e) {
         LOG.warn("Concurrent upvote, retrying.");
         retry = true;
+      } catch (Exception e) {
+        LOG.warn("Error while calling retry-able method.", e);
+        throw new RuntimeException(e);
       }
     } while (retry);
-    return "redirect:/";
   }
 }
