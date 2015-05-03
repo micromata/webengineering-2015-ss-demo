@@ -51,4 +51,22 @@ public class EntryController {
     } while (retry);
     return "redirect:/";
   }
+
+  @RequestMapping("/entry/{id}/downvote")
+  public String downvoteEntry(@PathVariable("id") Long id) {
+    LOG.info("Request to /entry/downvote with id={}", id);
+
+    // Upvote until it succeeds.
+    boolean retry;
+    do {
+      retry = false;
+      try {
+        entryService.downvote(id);
+      } catch (OptimisticLockingFailureException e) {
+        LOG.warn("Concurrent upvote, retrying.");
+        retry = true;
+      }
+    } while (retry);
+    return "redirect:/";
+  }
 }

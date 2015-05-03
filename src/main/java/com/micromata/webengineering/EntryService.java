@@ -62,4 +62,34 @@ public class EntryService {
     entryRepository.save(entry);
     LOG.info("Entry upvoted. vote={}, id={}", votes, id);
   }
+
+  /**
+   * Downvotes an entry given by the id.
+   *
+   * @param id the id of the entry.
+   */
+  public void downvote(Long id) {
+    Entry entry = entryRepository.findOne(id);
+    if (entry == null) {
+      LOG.warn("Entry not found. id={}", id);
+      return;
+    }
+
+    Long votes = entry.getVotes();
+    if (votes == null) {
+      LOG.error("votes for entry is null. id={}", id);
+      return;
+    }
+
+    votes -= 1;
+    // Check for negative votes.
+    if (votes < 0) {
+      LOG.debug("Minimum votes reached, ignoring downvote. id={}", id);
+      return;
+    }
+
+    entry.setVotes(votes);
+    entryRepository.save(entry);
+    LOG.info("Entry downvoted. vote={}, id={}", votes, id);
+  }
 }
