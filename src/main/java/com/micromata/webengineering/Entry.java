@@ -41,7 +41,8 @@ public class Entry {
   @Override
   public String toString() {
     return "Entry{" +
-        "votes=" + votes +
+        "id=" + id +
+        ", votes=" + votes +
         ", title='" + title + '\'' +
         '}';
   }
