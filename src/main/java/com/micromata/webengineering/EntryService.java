@@ -26,7 +26,7 @@ public class EntryService {
     Entry entry = new Entry();
     entry.setTitle(title);
     entry.setVotes((long) (Math.random() * 10000));
-    LOG.debug("Entry generated. entry={}", entry);
+    LOG.info("Entry created. entry={}", entry);
     entryRepository.save(entry);
 
     return entry.getId();
