@@ -3,6 +3,7 @@ package com.micromata.webengineering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,18 @@ public class EntryController {
   @RequestMapping("/entry/{id}/upvote")
   public String upvoteEntry(@PathVariable("id") Long id) {
     LOG.info("Request to /entry/upvote with id={}", id);
-    entryService.upvote(id);
+
+    // Upvote until it succeeds.
+    boolean retry;
+    do {
+      retry = false;
+      try {
+        entryService.upvote(id);
+      } catch (OptimisticLockingFailureException e) {
+        LOG.warn("Concurrent upvote, retrying.");
+        retry = true;
+      }
+    } while (retry);
     return "redirect:/";
   }
 }

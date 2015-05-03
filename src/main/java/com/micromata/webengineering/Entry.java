@@ -3,6 +3,7 @@ package com.micromata.webengineering;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  * POJO (plain old java object) for entries.
@@ -14,6 +15,9 @@ public class Entry {
   @Id
   @GeneratedValue
   private Long id;
+
+  @Version
+  private Long version;
 
   private Long votes;
   private String title;
