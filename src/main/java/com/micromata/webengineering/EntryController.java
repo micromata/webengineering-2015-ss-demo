@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,6 +30,13 @@ public class EntryController {
 
     entryService.createEntry(title);
 
+    return "redirect:/";
+  }
+
+  @RequestMapping("/entry/{id}/upvote")
+  public String upvoteEntry(@PathVariable("id") Long id) {
+    LOG.info("Request to /entry/upvote with id={}", id);
+    entryService.upvote(id);
     return "redirect:/";
   }
 }
