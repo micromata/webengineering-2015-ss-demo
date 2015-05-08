@@ -3,3 +3,12 @@
     bottom: 0;
     color: lightgray;
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 50px;
+}
