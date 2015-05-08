@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Hello, world</title>
   <link rel="stylesheet" data-th-href="@{/css/bootstrap.min.css}"/>
   <link rel="stylesheet" data-th-href="@{/css/bootstrap-theme.min.css}"/>
@@ -19,38 +19,44 @@
 
 <div class="container">
 
-  <form data-th-action="@{/entry}">
-    <label>Title</label>
-    <input type="text" name="title" autofocus="autofocus"/>
-    <button type="submit">Submit</button>
+  <form class="form-horizontal" data-th-action="@{/entry}">
+    <div class="form-group">
+      <label class="col-md-1 control-label">Title</label>
+
+      <div class="col-md-10">
+        <input class="form-control" type="text" name="title" autofocus="autofocus"/>
+      </div>
+      <button class="btn btn-success" type="submit">Submit</button>
+    </div>
   </form>
+  <hr/>
 
-<table class="table">
-  <thead>
-  <tr>
-    <td class="col-md-1" data-th-text="#{index.table.id}">ID</td>
-    <td class="col-md-1" data-th-text="#{index.table.votes}">Votes</td>
-    <td class="col-md-10" data-th-text="#{index.table.title}">Title</td>
-  </tr>
-  </thead>
-  <tr data-th-each="entry : ${list}">
-    <td>
-      <a data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
-        <span class="glyphicon glyphicon-arrow-up"></span>
-      </a>
-      <a data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
-        <span class="glyphicon glyphicon-arrow-down"></span>
-      </a>
-      <span data-th-text="${entry.id}"></span>
-    </td>
-    <td data-th-text="${entry.votes}"></td>
-    <td data-th-text="${entry.title}"></td>
-  </tr>
-</table>
+  <table class="table">
+    <thead>
+    <tr>
+      <td class="col-md-1" data-th-text="#{index.table.id}">ID</td>
+      <td class="col-md-1" data-th-text="#{index.table.votes}">Votes</td>
+      <td class="col-md-10" data-th-text="#{index.table.title}">Title</td>
+    </tr>
+    </thead>
+    <tr data-th-each="entry : ${list}">
+      <td>
+        <a data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
+          <span class="glyphicon glyphicon-arrow-up"></span>
+        </a>
+        <a data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
+          <span class="glyphicon glyphicon-arrow-down"></span>
+        </a>
+        <span data-th-text="${entry.id}"></span>
+      </td>
+      <td data-th-text="${entry.votes}"></td>
+      <td data-th-text="${entry.title}"></td>
+    </tr>
+  </table>
 
-<footer class="footer">
-  <span data-th-text="${date}"></span>
-</footer>
+  <footer class="footer">
+    <span data-th-text="${date}"></span>
+  </footer>
 </div>
 
 </body>
