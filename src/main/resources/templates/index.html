@@ -8,8 +8,15 @@
   <link rel="stylesheet" data-th-href="@{/css/main.css}"/>
 </head>
 <body>
-<span data-th-text="#{index.title}">Starrit</span>
-<hr/>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" data-th-href="@{/}" data-th-text="#{index.title}">Hauptseite</a>
+    </div>
+  </div>
+</nav>
+
 
 <table border="1">
   <tr data-th-each="entry : ${list}">
