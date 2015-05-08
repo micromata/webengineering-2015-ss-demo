@@ -1,6 +1,6 @@
-<head data-th-fragment="head">
+<head data-th-fragment="head(title)">
   <meta charset="UTF-8"/>
-  <title>Hello, world</title>
+  <title data-th-text="${title}">Hello, world</title>
   <link rel="stylesheet" data-th-href="@{/css/bootstrap.min.css}"/>
   <link rel="stylesheet" data-th-href="@{/css/bootstrap-theme.min.css}"/>
   <link rel="stylesheet" data-th-href="@{/css/main.css}"/>
