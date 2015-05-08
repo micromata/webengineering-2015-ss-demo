@@ -28,7 +28,12 @@
   </tr>
   </thead>
   <tr data-th-each="entry : ${list}">
-    <td data-th-text="${entry.id}"></td>
+    <td>
+      <span data-th-text="${entry.id}"></span>
+      <a data-th-href="@{/entry/} + ${entry.id} + '/upvote'">up</a>
+      <a data-th-href="@{/entry/} + ${entry.id} + '/downvote'">down</a>
+
+    </td>
     <td data-th-text="${entry.votes}"></td>
     <td data-th-text="${entry.title}"></td>
   </tr>
