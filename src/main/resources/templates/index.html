@@ -21,10 +21,8 @@
 
   <form class="form-horizontal" data-th-action="@{/entry}">
     <div class="form-group">
-      <label class="col-md-1 control-label" data-th-text="#{index.form.title}">Title</label>
-
-      <div class="col-md-10">
-        <input class="form-control" type="text" name="title" autofocus="autofocus"/>
+      <div class="col-md-11">
+        <input class="form-control" type="text" name="title" autofocus="autofocus" data-th-placeholder="#{index.form.title}"/>
       </div>
       <button class="col-md-1 btn btn-success" type="submit" data-th-text="#{index.form.submit}">Submit</button>
     </div>
