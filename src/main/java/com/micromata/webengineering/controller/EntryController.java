@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -31,7 +28,7 @@ public class EntryController {
   @Autowired
   private EntryService entryService;
 
-  @RequestMapping("/entry")
+  @RequestMapping(value = "/entry", method = RequestMethod.POST)
   public String entry(@RequestParam("title") String title) {
     LOG.info("Request to /entry");
     LOG.debug("title={}", title);
