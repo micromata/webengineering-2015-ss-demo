@@ -1,21 +1,9 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8"/>
-  <title>Hello, world</title>
-  <link rel="stylesheet" data-th-href="@{/css/bootstrap.min.css}"/>
-  <link rel="stylesheet" data-th-href="@{/css/bootstrap-theme.min.css}"/>
-  <link rel="stylesheet" data-th-href="@{/css/main.css}"/>
-</head>
+<head data-th-replace="header :: head"></head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" data-th-href="@{/}" data-th-text="#{index.title}">Hauptseite</a>
-    </div>
-  </div>
-</nav>
+<nav data-th-replace="header :: navigation"></nav>
 
 <div class="container">
 
