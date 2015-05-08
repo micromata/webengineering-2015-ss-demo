@@ -1,4 +1,4 @@
-package com.micromata.webengineering;
+package com.micromata.webengineering.persistence;
 
 import org.springframework.data.repository.CrudRepository;
 

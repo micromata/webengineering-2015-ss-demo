@@ -1,4 +1,4 @@
-package com.micromata.webengineering;
+package com.micromata.webengineering.persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

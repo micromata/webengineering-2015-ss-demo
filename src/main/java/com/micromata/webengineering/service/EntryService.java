@@ -1,5 +1,7 @@
-package com.micromata.webengineering;
+package com.micromata.webengineering.service;
 
+import com.micromata.webengineering.persistence.Entry;
+import com.micromata.webengineering.persistence.EntryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
