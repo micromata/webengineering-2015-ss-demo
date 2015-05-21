@@ -5,6 +5,7 @@ import com.micromata.webengineering.persistence.EntryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,7 +31,13 @@ public class EntryService {
     // One upvote from the user who created the entry.
     entry.setVotes(1L);
     LOG.info("Entry created. entry={}", entry);
-    entryRepository.save(entry);
+
+    try {
+      entryRepository.save(entry);
+    } catch (DataIntegrityViolationException e) {
+      LOG.warn("Error while storing entry (DataIntegrityViolationException)", e);
+      return -1;
+    }
 
     return entry.getId();
   }
