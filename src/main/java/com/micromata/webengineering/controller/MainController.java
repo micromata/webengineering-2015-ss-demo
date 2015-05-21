@@ -22,11 +22,6 @@ public class MainController {
   @Autowired
   private EntryRepository entryRepository;
 
-  @RequestMapping("/about")
-  public String about() {
-    return "about";
-  }
-
   @RequestMapping("/")
   public ModelAndView index() {
     LOG.info("Request to /index");
