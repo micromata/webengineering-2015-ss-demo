@@ -2,6 +2,7 @@ package com.micromata.webengineering.service;
 
 import com.micromata.webengineering.persistence.Entry;
 import com.micromata.webengineering.persistence.EntryRepository;
+import com.micromata.webengineering.persistence.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class EntryService {
   @Autowired
   private EntryRepository entryRepository;
 
+  @Autowired
+  private UserService userService;
+
   /**
    * Creates a new entry and stores it.
    *
@@ -31,6 +35,9 @@ public class EntryService {
     // One upvote from the user who created the entry.
     entry.setVotes(1L);
     LOG.info("Entry created. entry={}", entry);
+
+    User user = userService.getUser();
+    entry.setCreator(user);
 
     try {
       entryRepository.save(entry);
