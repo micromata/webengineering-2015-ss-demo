@@ -1,6 +1,7 @@
 package com.micromata.webengineering.controller;
 
 import com.micromata.webengineering.persistence.EntryRepository;
+import com.micromata.webengineering.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,20 @@ public class MainController {
   @Autowired
   private EntryRepository entryRepository;
 
+  @Autowired
+  private UserService userService;
+
   @RequestMapping("/")
   public ModelAndView index() {
     LOG.info("Request to /index");
 
     ModelAndView mav = new ModelAndView("index");
 
+    // TODO ML Clean up.
     mav.addObject("list", entryRepository.findAllByOrderByVotesDesc());
     mav.addObject("date", new Date());
+
+    mav.addObject("user", userService.getUser());
 
     return mav;
   }
