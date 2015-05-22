@@ -1,9 +1,6 @@
 package com.micromata.webengineering.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 /**
  * POJO (plain old java object) for entries.
@@ -18,6 +15,17 @@ public class Entry {
 
   @Version
   private Long version;
+
+  @OneToOne
+  private User creator;
+
+  public User getCreator() {
+    return creator;
+  }
+
+  public void setCreator(User creator) {
+    this.creator = creator;
+  }
 
   private Long votes;
   private String title;
