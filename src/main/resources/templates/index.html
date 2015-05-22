@@ -32,10 +32,10 @@
     </thead>
     <tr data-th-each="entry : ${list}">
       <td>
-        <a data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
+        <a data-th-if="${user.votedEntries.contains(entry) == false}" data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
           <span class="glyphicon glyphicon-arrow-up"></span>
         </a>
-        <a data-th-if="${entry.votes} > 0" data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
+        <a data-th-if="${user.votedEntries.contains(entry)} and ${entry.votes} > 0" data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
           <span class="glyphicon glyphicon-arrow-down"></span>
         </a>
         <span data-th-text="${entry.id}"></span>
