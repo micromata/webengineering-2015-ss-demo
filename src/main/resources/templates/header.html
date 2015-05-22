@@ -24,7 +24,7 @@
         </p>
       </li>
 
-      <li class="navbar-btn">
+      <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}" class="navbar-btn">
         <form data-th-action="@{/logout}" method="post">
           <button class="btn btn-link" type="submit">Logout</button>
         </form>
