@@ -14,6 +14,11 @@
     <span data-th-text="${#httpServletRequest.remoteUser}"></span>
     <br/>
     <span data-th-text="${#httpServletRequest.isUserInRole('ROLE_USER')}"></span>
+    <br/>
+
+    <form data-th-action="@{/logout}" method="post">
+      <button type="submit">Logout</button>
+    </form>
   </div>
   <form class="form-horizontal" data-th-action="@{/entry}" method="post">
     <div class="form-group">
