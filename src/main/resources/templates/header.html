@@ -29,6 +29,11 @@
           <button class="btn btn-link" type="submit">Logout</button>
         </form>
       </li>
+
+      <li>
+        <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
+           data-th-text="#{navigation.login}" data-th-href="@{/login}">Login</a>
+      </li>
     </ul>
   </div>
 </nav>
