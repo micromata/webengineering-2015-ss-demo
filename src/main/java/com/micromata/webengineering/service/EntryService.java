@@ -33,6 +33,10 @@ public class EntryService {
    */
   @Transactional
   public long createEntry(String title) {
+    if (userService.isAuthenticated() == false) {
+      return -1;
+    }
+
     Entry entry = new Entry();
     entry.setTitle(title);
     // One upvote from the user who created the entry.
@@ -59,6 +63,10 @@ public class EntryService {
    */
   @Transactional
   public void upvote(Long id) {
+    if (userService.isAuthenticated() == false) {
+      return;
+    }
+
     Entry entry = entryRepository.findOne(id);
     if (entry == null) {
       LOG.warn("Entry not found. id={}", id);
@@ -95,6 +103,10 @@ public class EntryService {
    */
   @Transactional
   public void downvote(Long id) {
+    if (userService.isAuthenticated() == false) {
+      return;
+    }
+
     Entry entry = entryRepository.findOne(id);
     if (entry == null) {
       LOG.warn("Entry not found. id={}", id);
