@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * Provides methods to work with Entry objects.
  *
@@ -29,6 +31,7 @@ public class EntryService {
    *
    * @param title the entry' title
    */
+  @Transactional
   public long createEntry(String title) {
     Entry entry = new Entry();
     entry.setTitle(title);
@@ -54,6 +57,7 @@ public class EntryService {
    *
    * @param id the id of the entry.
    */
+  @Transactional
   public void upvote(Long id) {
     Entry entry = entryRepository.findOne(id);
     if (entry == null) {
@@ -89,6 +93,7 @@ public class EntryService {
    *
    * @param id the id of the entry.
    */
+  @Transactional
   public void downvote(Long id) {
     Entry entry = entryRepository.findOne(id);
     if (entry == null) {
