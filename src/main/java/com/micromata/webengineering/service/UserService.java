@@ -48,4 +48,18 @@ public class UserService {
     LOG.info("User voted for entry. userId={}, entryId={}", user.getId(), entry.getId());
     return true;
   }
+
+  public boolean addDownvote(Entry entry) {
+    User user = getUser();
+
+    if (user.getVotedEntries().contains(entry) == false) {
+      LOG.info("User has not yet voted for entry. userId={}, entryId={}", user.getId(), entry.getId());
+      return false;
+    }
+
+    user.getVotedEntries().remove(entry);
+    userRepository.save(user);
+    LOG.info("User downvoted for entry. userId={}, entryId={}", user.getId(), entry.getId());
+    return true;
+  }
 }

@@ -109,6 +109,11 @@ public class EntryService {
       return;
     }
 
+    boolean isDownVoted = userService.addDownvote(entry);
+    if (isDownVoted == false) {
+      return;
+    }
+
     entry.setVotes(votes);
     entryRepository.save(entry);
     LOG.info("Entry downvoted. vote={}, id={}", votes, id);
