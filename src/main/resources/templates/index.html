@@ -10,6 +10,10 @@
   <div style="background-color: lightpink; border: 1px solid black; margin: 15px; padding: 15px"
       >
     <span data-th-text="${user}"></span>
+    <br/>
+    <span data-th-text="${#httpServletRequest.remoteUser}"></span>
+    <br/>
+    <span data-th-text="${#httpServletRequest.isUserInRole('ROLE_USER')}"></span>
   </div>
   <form class="form-horizontal" data-th-action="@{/entry}" method="post">
     <div class="form-group">
