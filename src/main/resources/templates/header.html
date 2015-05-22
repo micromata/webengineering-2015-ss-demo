@@ -17,5 +17,12 @@
         <a data-th-text="#{about.title}" data-th-href="@{/about}">About</a>
       </li>
     </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <p class="navbar-text" data-th-utext="#{navigation.login.status(${#httpServletRequest.remoteUser})}">
+        </p>
+      </li>
+    </ul>
   </div>
 </nav>
