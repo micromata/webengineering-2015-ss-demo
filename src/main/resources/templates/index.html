@@ -26,7 +26,9 @@
     <tr>
       <td class="col-md-1" data-th-text="#{index.table.id}">ID</td>
       <td class="col-md-1" data-th-text="#{index.table.votes}">Votes</td>
-      <td class="col-md-10" data-th-text="#{index.table.title}">Title</td>
+      <td class="col-md-1" data-th-text="#{index.table.creator}">Creator</td>
+      <!--TODO ML 9-1 ;-)-->
+      <td class="col-md-9" data-th-text="#{index.table.title}">Title</td>
     </tr>
     </thead>
     <tr data-th-each="entry : ${list}">
@@ -40,6 +42,7 @@
         <span data-th-text="${entry.id}"></span>
       </td>
       <td data-th-text="${entry.votes}"></td>
+      <td data-th-text="${entry.creator.username}"></td>
       <td data-th-text="${entry.title}"></td>
     </tr>
   </table>
