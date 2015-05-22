@@ -1,9 +1,7 @@
 package com.micromata.webengineering.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * User object.
@@ -18,6 +16,17 @@ public class User {
 
   @Version
   private Long version;
+
+  @ManyToMany
+  List<Entry> votedEntries;
+
+  public List<Entry> getVotedEntries() {
+    return votedEntries;
+  }
+
+  public void setVotedEntries(List<Entry> votedEntries) {
+    this.votedEntries = votedEntries;
+  }
 
   private String username;
   private String password;
