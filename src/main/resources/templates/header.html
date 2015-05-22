@@ -19,7 +19,7 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li>
+      <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
         <p class="navbar-text" data-th-utext="#{navigation.login.status(${#httpServletRequest.remoteUser})}">
         </p>
       </li>
