@@ -23,6 +23,12 @@
         <p class="navbar-text" data-th-utext="#{navigation.login.status(${#httpServletRequest.remoteUser})}">
         </p>
       </li>
+
+      <li class="navbar-btn">
+        <form data-th-action="@{/logout}" method="post">
+          <button class="btn btn-link" type="submit">Logout</button>
+        </form>
+      </li>
     </ul>
   </div>
 </nav>
