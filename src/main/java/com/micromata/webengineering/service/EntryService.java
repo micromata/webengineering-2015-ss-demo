@@ -74,6 +74,11 @@ public class EntryService {
       votes = Long.MAX_VALUE;
     }
 
+    boolean isVoted = userService.addUpvote(entry);
+    if (isVoted == false) {
+      return;
+    }
+
     entry.setVotes(votes);
     entryRepository.save(entry);
     LOG.info("Entry upvoted. vote={}, id={}", votes, id);
