@@ -36,7 +36,11 @@ public class MainController {
     mav.addObject("list", entryRepository.findAllByOrderByVotesDesc());
     mav.addObject("date", new Date());
 
-    mav.addObject("user", userService.getUser());
+    boolean authenticated = userService.isAuthenticated();
+    mav.addObject("auth", authenticated);
+    if (authenticated) {
+      mav.addObject("user", userService.getUser());
+    }
 
     return mav;
   }

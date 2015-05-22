@@ -6,9 +6,8 @@ import com.micromata.webengineering.persistence.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.Iterator;
 
 /**
  * Domain-specific methods for users.
@@ -22,21 +21,33 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
+  public boolean isAuthenticated() {
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return (principal instanceof String) == false;
+  }
+
   public User getUser() {
-    Iterator<User> it = userRepository.findAll().iterator();
-    if (it.hasNext() == false) {
-      User user = new User();
-      user.setUsername("user");
-      user.setPassword("foo");
-      userRepository.save(user);
-      return user;
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    if (principal instanceof String) {
+      return null;
     }
 
-    return it.next();
+    org.springframework.security.core.userdetails.User userDetails = (org.springframework.security.core.userdetails.User) principal;
+    User user = userRepository.findByUsername(userDetails.getUsername());
+    if (user == null) {
+      LOG.warn("User from session not found. username={}", userDetails.getUsername());
+      return null;
+    }
+
+    return user;
   }
 
   public boolean addUpvote(Entry entry) {
     User user = getUser();
+    if (user == null) {
+      return false;
+    }
 
     if (user.getVotedEntries().contains(entry)) {
       LOG.info("User already voted for entry. userId={}, entryId={}", user.getId(), entry.getId());
@@ -51,6 +62,9 @@ public class UserService {
 
   public boolean addDownvote(Entry entry) {
     User user = getUser();
+    if (user == null) {
+      return false;
+    }
 
     if (user.getVotedEntries().contains(entry) == false) {
       LOG.info("User has not yet voted for entry. userId={}, entryId={}", user.getId(), entry.getId());
