@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -47,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
       auth
           .jdbcAuthentication()
+          .passwordEncoder(new ShaPasswordEncoder(256))
           .dataSource(dataSource)
           .usersByUsernameQuery("select username,password,'true' from user where username = ?")
           .authoritiesByUsernameQuery("select username,'ROLE_USER' from user where username = ?")
