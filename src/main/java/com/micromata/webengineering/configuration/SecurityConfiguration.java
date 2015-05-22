@@ -15,6 +15,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         .antMatchers("/css/**").permitAll()
         .antMatchers("/**").authenticated()
+        .and()
+
+        .formLogin()
     ;
   }
+
+
 }
