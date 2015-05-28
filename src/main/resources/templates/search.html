@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head data-th-replace="header :: head(#{search.title.bar})"></head>
+<body>
+
+<nav data-th-replace="header :: navigation"></nav>
+
+<div class="container">
+
+  <form class="form-horizontal" data-th-action="@{/entry}" method="post">
+    <div class="form-group">
+      <div class="col-md-11">
+        <input class="form-control" type="text" name="title" autofocus="autofocus" data-th-placeholder="#{search.form.title}" maxlength="255"/>
+      </div>
+      <button class="col-md-1 btn btn-success" type="submit" data-th-text="#{search.form.submit}">Submit</button>
+    </div>
+  </form>
+  <hr/>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <td class="col-md-1" data-th-text="#{index.table.id}">ID</td>
+      <td class="col-md-1" data-th-text="#{index.table.votes}">Votes</td>
+      <td class="col-md-1" data-th-text="#{index.table.creator}">Creator</td>
+      <td class="col-md-9" data-th-text="#{index.table.title}">Title</td>
+    </tr>
+    </thead>
+    <tr data-th-each="entry : ${list}">
+      <td>
+        <a data-th-if="${auth} and ${user.votedEntries.contains(entry) == false}" data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
+          <span class="glyphicon glyphicon-arrow-up"></span>
+        </a>
+        <a data-th-if="${auth} and ${user.votedEntries.contains(entry)} and ${entry.votes} > 0" data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
+          <span class="glyphicon glyphicon-arrow-down"></span>
+        </a>
+        <span data-th-text="${entry.id}"></span>
+      </td>
+      <td data-th-text="${entry.votes}"></td>
+      <td data-th-text="${entry.creator.username}"></td>
+      <td data-th-text="${entry.title}"></td>
+    </tr>
+  </table>
+
+  <footer class="footer">
+    <span data-th-text="${date}"></span>
+  </footer>
+</div>
+
+</body>
+</html>
