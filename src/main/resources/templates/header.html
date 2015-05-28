@@ -37,6 +37,10 @@
         <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
            data-th-text="#{navigation.login}" data-th-href="@{/login}">Login</a>
       </li>
+      <li>
+        <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
+           data-th-text="#{navigation.register}" data-th-href="@{/register}">Login</a>
+      </li>
     </ul>
   </div>
 </nav>
