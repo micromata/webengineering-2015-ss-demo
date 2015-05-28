@@ -1,5 +1,6 @@
 package com.micromata.webengineering.controller;
 
+import com.micromata.webengineering.persistence.User;
 import com.micromata.webengineering.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class UserRegistrationController {
     }
 
     if (error == false) {
-      // TODO ML Register user.
+      User user = userService.registerUser(username, password1);
       return mainController.index();
     }
 

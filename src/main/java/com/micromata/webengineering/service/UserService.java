@@ -6,6 +6,7 @@ import com.micromata.webengineering.persistence.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -79,5 +80,19 @@ public class UserService {
 
   public boolean userExists(String username) {
     return username != null && userRepository.findByUsername(username) != null;
+  }
+
+  public User registerUser(String username, String password) {
+    if (userExists(username)) {
+      LOG.warn("User already exists. username={}", username);
+      return null;
+    }
+
+    User user = new User();
+    user.setUsername(username);
+    user.setPassword(new ShaPasswordEncoder(256).encodePassword(password, null));
+    userRepository.save(user);
+    LOG.info("User created. username={}", username);
+    return user;
   }
 }
