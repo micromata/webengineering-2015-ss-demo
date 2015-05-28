@@ -1,5 +1,6 @@
 package com.micromata.webengineering.persistence;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -11,4 +12,7 @@ import java.util.List;
  */
 public interface EntryRepository extends CrudRepository<Entry, Long> {
   List<Entry> findAllByOrderByVotesDesc();
+
+  @Query("SELECT e FROM Entry e WHERE LOWER(e.title) LIKE %?1% ORDER BY e.votes DESC")
+  List<Entry> search(String title);
 }
