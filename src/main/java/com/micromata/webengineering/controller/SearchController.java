@@ -25,6 +25,11 @@ public class SearchController {
     LOG.info("Request to /search");
     ModelAndView mav = new ModelAndView("search");
 
+    if (query != null) {
+      mav.addObject("list", entryService.search(query));
+      mav.addObject("query", query);
+    }
+
     return mav;
   }
 }

@@ -10,7 +10,8 @@
   <form class="form-horizontal" data-th-action="@{/search}" method="get">
     <div class="form-group">
       <div class="col-md-11">
-        <input class="form-control" type="text" name="query" autofocus="autofocus" data-th-placeholder="#{search.form.title}" maxlength="255"/>
+        <input class="form-control" type="text" name="query" data-th-value="${query}" autofocus="autofocus" data-th-placeholder="#{search.form.title}"
+               maxlength="255"/>
       </div>
       <button class="col-md-1 btn btn-success" type="submit" data-th-text="#{search.form.submit}">Submit</button>
     </div>
