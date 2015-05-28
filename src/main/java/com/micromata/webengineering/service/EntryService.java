@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Provides methods to work with Entry objects.
@@ -134,5 +135,9 @@ public class EntryService {
     entry.setVotes(votes);
     entryRepository.save(entry);
     LOG.info("Entry downvoted. vote={}, id={}", votes, id);
+  }
+
+  public List<Entry> search(String query) {
+    return entryRepository.search(query.toLowerCase());
   }
 }
