@@ -9,12 +9,15 @@
 
   <p class="lead" data-th-text="#{registration.text}"></p>
 
+  <div data-th-if="${userExists}" class="alert alert-danger" data-th-text="#{register.userExists}"></div>
+  <div data-th-if="${passwordsNotEqual}" class="alert alert-danger" data-th-text="#{register.passwordsNotEqual}"></div>
+
   <form class="form-horizontal" data-th-action="@{/register}" method="post">
     <div class="form-group">
       <label class="control-label col-md-1" data-th-text="#{register.form.username}">Username</label>
 
       <div class="col-md-4">
-        <input class="form-control" type="text" name="username" autofocus="autofocus"/>
+        <input class="form-control" type="text" name="username" data-th-value="${username}? ${username}" autofocus="autofocus"/>
       </div>
     </div>
     <div class="form-group">

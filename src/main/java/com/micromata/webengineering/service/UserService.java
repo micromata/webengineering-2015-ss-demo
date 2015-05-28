@@ -76,4 +76,8 @@ public class UserService {
     LOG.info("User downvoted for entry. userId={}, entryId={}", user.getId(), entry.getId());
     return true;
   }
+
+  public boolean userExists(String username) {
+    return username != null && userRepository.findByUsername(username) != null;
+  }
 }
