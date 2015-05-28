@@ -6,9 +6,14 @@ import com.micromata.webengineering.persistence.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 /**
  * Domain-specific methods for users.
@@ -91,8 +96,19 @@ public class UserService {
     User user = new User();
     user.setUsername(username);
     user.setPassword(new ShaPasswordEncoder(256).encodePassword(password, null));
+    user.setVotedEntries(Collections.emptyList());
     userRepository.save(user);
     LOG.info("User created. username={}", username);
     return user;
+  }
+
+  public void login(User user) {
+    org.springframework.security.core.userdetails.User authUser = new org.springframework.security.core.userdetails.User(
+        user.getUsername(),
+        user.getPassword(),
+        AuthorityUtils.createAuthorityList("ROLE_USER"));
+    Authentication auth = new UsernamePasswordAuthenticationToken(authUser, authUser.getPassword(), authUser.getAuthorities());
+    SecurityContextHolder.getContext().setAuthentication(auth);
+    LOG.info("Programatically logged in user. username={}", user.getUsername());
   }
 }

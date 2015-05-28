@@ -48,6 +48,7 @@ public class UserRegistrationController {
 
     if (error == false) {
       User user = userService.registerUser(username, password1);
+      userService.login(user);
       return mainController.index();
     }
 
