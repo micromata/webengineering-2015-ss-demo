@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head data-th-replace="header :: head(#{register.title.bar})"></head>
+<body>
+
+<nav data-th-replace="header :: navigation"></nav>
+
+<div class="container">
+
+  <p class="lead" data-th-text="#{registration.text}"></p>
+
+  <form class="form-horizontal" data-th-action="@{/register}" method="post">
+    <div class="form-group">
+      <label class="control-label col-md-1" data-th-text="#{register.form.username}">Username</label>
+
+      <div class="col-md-4">
+        <input class="form-control" type="text" name="username" autofocus="autofocus"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-1" data-th-text="#{register.form.password}">Password</label>
+
+      <div class="col-md-4">
+        <input class="form-control" type="password" name="password1"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-1" data-th-text="#{register.form.password}">Password</label>
+
+      <div class="col-md-4">
+        <input class="form-control" type="password" name="password2"/>
+      </div>
+    </div>
+    <button class="col-md-offset-1 col-md-1 btn btn-success" type="submit" data-th-text="#{register.form.submit}">Submit</button>
+  </form>
+
+
+</div>
+
+</body>
+</html>
