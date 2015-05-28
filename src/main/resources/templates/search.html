@@ -7,10 +7,10 @@
 
 <div class="container">
 
-  <form class="form-horizontal" data-th-action="@{/entry}" method="post">
+  <form class="form-horizontal" data-th-action="@{/search}" method="get">
     <div class="form-group">
       <div class="col-md-11">
-        <input class="form-control" type="text" name="title" autofocus="autofocus" data-th-placeholder="#{search.form.title}" maxlength="255"/>
+        <input class="form-control" type="text" name="query" autofocus="autofocus" data-th-placeholder="#{search.form.title}" maxlength="255"/>
       </div>
       <button class="col-md-1 btn btn-success" type="submit" data-th-text="#{search.form.submit}">Submit</button>
     </div>
@@ -28,12 +28,6 @@
     </thead>
     <tr data-th-each="entry : ${list}">
       <td>
-        <a data-th-if="${auth} and ${user.votedEntries.contains(entry) == false}" data-th-href="@{/entry/} + ${entry.id} + '/upvote'">
-          <span class="glyphicon glyphicon-arrow-up"></span>
-        </a>
-        <a data-th-if="${auth} and ${user.votedEntries.contains(entry)} and ${entry.votes} > 0" data-th-href="@{/entry/} + ${entry.id} + '/downvote'">
-          <span class="glyphicon glyphicon-arrow-down"></span>
-        </a>
         <span data-th-text="${entry.id}"></span>
       </td>
       <td data-th-text="${entry.votes}"></td>
