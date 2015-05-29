@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +67,8 @@ public class EntryController {
   @ResponseBody
   @RequestMapping("/entry/all")
   public List<Entry> allEntries() {
-    return entryRepository.findAllByOrderByVotesDesc();
+    PageRequest pageable = new PageRequest(0, Integer.MAX_VALUE);
+    return entryRepository.findAllByOrderByVotesDesc(pageable).getContent();
   }
 
   /**

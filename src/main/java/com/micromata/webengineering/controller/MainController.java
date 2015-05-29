@@ -5,6 +5,7 @@ import com.micromata.webengineering.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +34,9 @@ public class MainController {
     ModelAndView mav = new ModelAndView("index");
 
     // TODO ML Clean up.
-    mav.addObject("list", entryRepository.findAllByOrderByVotesDesc());
+
+    PageRequest pageable = new PageRequest(0, 10);
+    mav.addObject("list", entryRepository.findAllByOrderByVotesDesc(pageable));
     mav.addObject("date", new Date());
 
     boolean authenticated = userService.isAuthenticated();
