@@ -44,8 +44,8 @@
 
   <nav>
     <ul class="pager">
-      <li data-th-if="${page.first == false}" class="previous"><a href="#">Older</a></li>
-      <li data-th-if="${page.last == false}" class="next"><a href="#">Newer</a></li>
+      <li data-th-if="${page.first == false}" class="previous"><a data-th-href="@{/(page=${page.number-1})}">Older</a></li>
+      <li data-th-if="${page.last == false}" class="next"><a data-th-href="@{/(page=${page.number+1})}">Newer</a></li>
     </ul>
   </nav>
 
