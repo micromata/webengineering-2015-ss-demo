@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,7 +50,7 @@ public class UserRegistrationController {
     if (error == false) {
       User user = userService.registerUser(username, password1);
       userService.login(user);
-      return mainController.index();
+      return mainController.index(new PageRequest(0, 20));
     }
 
     return mav;
