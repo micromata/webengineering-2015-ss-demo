@@ -35,6 +35,7 @@ public class EntryService {
   @Transactional
   public long createEntry(String title) {
     if (userService.isAuthenticated() == false) {
+      LOG.info("Non-authenticated user tried to post an entry");
       return -1;
     }
 
