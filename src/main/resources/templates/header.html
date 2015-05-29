@@ -9,38 +9,45 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" data-th-fragment="navigation">
   <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" data-th-href="@{/}" data-th-text="#{index.title}">Hauptseite</a>
     </div>
 
-    <ul class="nav navbar-nav">
-      <li>
-        <a data-th-text="#{about.title}" data-th-href="@{/about}">About</a>
-      </li>
-      <li>
-        <a data-th-text="#{search.title}" data-th-href="@{/search}">About</a>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li>
+          <a data-th-text="#{about.title}" data-th-href="@{/about}">About</a>
+        </li>
+        <li>
+          <a data-th-text="#{search.title}" data-th-href="@{/search}">About</a>
+        </li>
+      </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
-        <p class="navbar-text" data-th-utext="#{navigation.login.status(${#httpServletRequest.remoteUser})}">
-        </p>
-      </li>
+      <ul class="nav navbar-nav navbar-right">
+        <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}">
+          <p class="navbar-text" data-th-utext="#{navigation.login.status(${#httpServletRequest.remoteUser})}">
+          </p>
+        </li>
 
-      <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}" class="navbar-btn">
-        <form data-th-action="@{/logout}" method="post">
-          <button class="btn btn-link" type="submit">Logout</button>
-        </form>
-      </li>
+        <li data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER')}" class="navbar-btn">
+          <form data-th-action="@{/logout}" method="post">
+            <button class="btn btn-link" type="submit">Logout</button>
+          </form>
+        </li>
 
-      <li>
-        <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
-           data-th-text="#{navigation.login}" data-th-href="@{/login}">Login</a>
-      </li>
-      <li>
-        <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
-           data-th-text="#{navigation.register}" data-th-href="@{/register}">Login</a>
-      </li>
-    </ul>
+        <li>
+          <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
+             data-th-text="#{navigation.login}" data-th-href="@{/login}">Login</a>
+        </li>
+        <li>
+          <a data-th-if="${#httpServletRequest.isUserInRole('ROLE_USER') == false}"
+             data-th-text="#{navigation.register}" data-th-href="@{/register}">Login</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
