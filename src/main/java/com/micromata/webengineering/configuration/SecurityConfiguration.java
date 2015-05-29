@@ -27,6 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    if (environment.acceptsProfiles("heroku") == false) {
+      LOG.warn("CSRF disabled!?");
+      http.csrf().disable();
+    }
+
     http.authorizeRequests()
         .antMatchers("/**").permitAll()
         .and()
