@@ -9,7 +9,7 @@
 
   <form data-th-if="${auth}" class="form-horizontal" data-th-action="@{/entry}" method="post">
     <div class="form-group">
-      <div class="col-md-11">
+      <div class="col-md-11 col-xs-8">
         <input class="form-control" type="text" name="title" autofocus="autofocus" data-th-placeholder="#{index.form.title}" maxlength="255"/>
       </div>
       <button class="col-md-1 btn btn-success" type="submit" data-th-text="#{index.form.submit}">Submit</button>
