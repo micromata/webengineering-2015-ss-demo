@@ -13,3 +13,7 @@ body {
     margin-bottom: 50px;
     margin-top: 75px;
 }
+
+.navbar-text {
+    margin-left: 15px;
+}
