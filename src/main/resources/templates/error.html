@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head data-th-replace="header :: head(#{index.title.bar})"></head>
+<body>
+
+<nav data-th-replace="header :: navigation"></nav>
+
+<div class="container">
+
+  <span class="alert alert-danger col-md-12" data-th-text="#{error.message}"></span>
+
+</div>
+
+<div data-th-replace="footer :: javascript"></div>
+
+</body>
+</html>
