@@ -54,16 +54,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           .password("foo")
           .roles("USER")
       ;
-
-      auth
-          .jdbcAuthentication()
-          .passwordEncoder(new ShaPasswordEncoder(256))
-          .dataSource(dataSource)
-          .usersByUsernameQuery("select username,password,'true' from users where username = ?")
-          .authoritiesByUsernameQuery("select username,'ROLE_USER' from users where username = ?")
-      ;
     }
 
-
+    auth
+        .jdbcAuthentication()
+        .passwordEncoder(new ShaPasswordEncoder(256))
+        .dataSource(dataSource)
+        .usersByUsernameQuery("select username,password,'true' from users where username = ?")
+        .authoritiesByUsernameQuery("select username,'ROLE_USER' from users where username = ?")
+    ;
   }
 }
