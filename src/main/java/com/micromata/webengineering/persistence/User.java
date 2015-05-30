@@ -9,6 +9,7 @@ import java.util.List;
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
 @Entity
+@Table(name = "USERS")
 public class User {
   @Id
   @GeneratedValue
