@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Michael Lesniak (mlesniak@micromata.de)
  */
-@Entity
+@Entity(name = "USERS")
 @Table(name = "USERS")
 public class User {
   @Id
